@@ -40,5 +40,5 @@ jobs:
           gh release upload "${GITHUB_REF#refs/tags/}" \
             "${ARCHIVE_NAME}.zip#Built static files (zip)" \
             "${ARCHIVE_NAME}.zip.sha256#Built static files checksum (zip.sha256)" \
-            "${ARCHIVE_NAME}.tar.gzp#Built static files (.tar.gz)" \
-            "${ARCHIVE_NAME}.tar.gz.sha256#Built static files (.tar.gz.sha256)"
+            "${ARCHIVE_NAME}.tar.gz#Built static files (.tar.gz)" \
+            "${ARCHIVE_NAME}.tar.gz.sha256#Built static files checksum (.tar.gz.sha256)"
