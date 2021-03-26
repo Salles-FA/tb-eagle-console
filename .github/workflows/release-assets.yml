@@ -24,13 +24,11 @@ jobs:
           mv dist/tb-eagle-console-ui/ "${ARCHIVE_NAME}/"
       - name: ZIP built static files and checksum
         shell: bash
-        env: 
         run: |
           zip -r "${ARCHIVE_NAME}.zip" "${ARCHIVE_NAME}/"
           sha256sum "$ARCHIVE_NAME.zip" > "$ARCHIVE_NAME.zip.sha256"
       - name: Tarball built static files and checksum
         shell: bash
-        env: 
         run: |
           tar -cvzf "${ARCHIVE_NAME}.tar.gz" "${ARCHIVE_NAME}/"
           sha256sum "${ARCHIVE_NAME}.tar.gz" > "${ARCHIVE_NAME}.tar.gz.sha256"
