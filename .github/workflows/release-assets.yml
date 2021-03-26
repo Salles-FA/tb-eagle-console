@@ -22,23 +22,23 @@ jobs:
           npm install
           npm run build
           mv dist/tb-eagle-console-ui/ "${ARCHIVE_NAME}/"
-      - name: ZIP built static files and checksum
-        shell: bash
-        run: |
-          zip -r "${ARCHIVE_NAME}.zip" "${ARCHIVE_NAME}/"
-          sha256sum "$ARCHIVE_NAME.zip" > "$ARCHIVE_NAME.zip.sha256"
       - name: Tarball built static files and checksum
         shell: bash
         run: |
           tar -cvzf "${ARCHIVE_NAME}.tar.gz" "${ARCHIVE_NAME}/"
           sha256sum "${ARCHIVE_NAME}.tar.gz" > "${ARCHIVE_NAME}.tar.gz.sha256"
+      - name: ZIP built static files and checksum
+        shell: bash
+        run: |
+          zip -r "${ARCHIVE_NAME}.zip" "${ARCHIVE_NAME}/"
+          sha256sum "$ARCHIVE_NAME.zip" > "$ARCHIVE_NAME.zip.sha256"
       - name: Add assets to release
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release upload "${GITHUB_REF#refs/tags/}" \
-            "${ARCHIVE_NAME}.zip#Built static files (zip)" \
-            "${ARCHIVE_NAME}.zip.sha256#Built static files checksum (zip.sha256)" \
-            "${ARCHIVE_NAME}.tar.gz#Built static files (.tar.gz)" \
-            "${ARCHIVE_NAME}.tar.gz.sha256#Built static files checksum (.tar.gz.sha256)"
+            "${ARCHIVE_NAME}.tar.gz#Build (tar.gz)" \
+            "${ARCHIVE_NAME}.tar.gz.sha256#Build checksum (tar.gz.sha256)" \
+            "${ARCHIVE_NAME}.zip#Build (zip)" \
+            "${ARCHIVE_NAME}.zip.sha256#Build checksum (zip.sha256)"
